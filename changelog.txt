@@ -1,0 +1,34 @@
+Changelog for refactoring the Simple Notepad tool code.
+
+1. Identifying code smells
+Line 69-119: method:  public void actionPerformed(ActionEvent e)
+Code smell type: Object-Orientation abusers, Bloaters
+- Use of multiple if-else
+- Very long method, also will increase as we add more actions
+
+Line 27-33 and other related code
+Code smell type: Dispensables
+- Duplicate code for creating and initializing menuitems
+
+Line 116-117: code for "undo" action (and related code for undo menuitem)
+Code smell: Dispensables
+-This is unimplemented code. Better to remove it
+
+Line 112-114: code inside "paste" action command block
+Code smell type: Dispensables
+-These lines of code are unessesary
+
+
+2. Refactoring code
+- Removed method actionPerformed from class SimpleNotePad and added individual action classes to handle each action instead. This makes it more readable, maintainable and scalable to add new operations to the application
+
+- Removed all MenuItem declaration and setup code and created a method GetMenuItem in the class MenuItemUtility since this is duplicate code repeated for each menuitem. 
+
+- Removed Undo menuitem and related code in the method actionPerformed since this is unused code.
+
+- Removed unsed code from paste action
+
+
+3. Adding new features
+Added open file and recent files feature to file menu.
+Added replace feature to edit menu.
